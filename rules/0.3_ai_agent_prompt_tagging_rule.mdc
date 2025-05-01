@@ -1,0 +1,216 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ ---
+description: ALWAYS use when creating AI agent prompts for customer communication analysis workflows to ensure consistent tagging
+globs: **/*.{yml,yaml,json,md,txt}
+---
+# AI Agent Prompt Tagging Rule
+
+## Context
+- This rule applies to AI agent prompts used in customer communication analysis workflows
+- Used for data cleaning, knowledge extraction, validation, and synthesis of customer needs
+- Follows the workflow described in `01_meta-rule-analyzis-synthesis workflow.mdc`
+- Ensures consistent tagging across all prompts in the workflow
+
+## Requirements
+
+### Tag Consistency Requirements
+- All tags must be consistent across all prompts in the workflow
+- First prompt establishes the key tags that must be maintained in subsequent prompts
+- Tags must be semantically consistent (same meaning and purpose) even if workflow steps change
+- Tag names must follow a consistent naming convention throughout the entire workflow
+
+### Tag Placement Requirements
+- Each key block in a prompt must have an appropriate tag based on its type
+- System prompts: tags should wrap knowledge, frameworks, and reference material
+- User prompts: tags should wrap specific tasks, input data, and output requirements
+- Tags must be placed according to principles in `02_airesearch_agent_prompt_engeniring_rule.mdc`
+
+### Tag Structure Requirements
+- Use XML-style tags with clear, descriptive names: `<tag_name>content</tag_name>`
+- Tags must be properly nested and closed
+- Content within tags must be indented by 2 spaces for readability
+- Tags should be semantically meaningful and reflect the purpose of the content they contain
+
+### Workflow-Specific Tag Requirements
+1. **Data Cleaning Tags**:
+   - `<research_questions>` - For defining research questions based on research goals
+   - `<analysis_framework>` - For defining the framework for customer communication analysis
+   - `<research_boundaries>` - For defining what's in/out of scope for the analysis
+   - `<cleaning_instructions>` - For instructions on cleaning customer communication data
+
+2. **Knowledge Extraction Tags**:
+   - `<extraction_criteria>` - For criteria used to extract relevant quotes
+   - `<quote_analysis>` - For instructions on analyzing quotes
+   - `<knowledge_packaging>` - For instructions on packaging data into knowledge about customer needs
+
+3. **Knowledge Validation Tags**:
+   - `<validation_criteria>` - For criteria to validate knowledge formulations
+   - `<validation_instructions>` - For instructions on validating knowledge with supporting quotes
+   - `<semantic_consistency>` - For checking semantic consistency between quotes and formulations
+
+4. **Knowledge Synthesis Tags**:
+   - `<synthesis_criteria>` - For criteria to synthesize knowledge about common customer needs
+   - `<synthesis_instructions>` - For instructions on synthesizing knowledge
+   - `<hypothesis_generation>` - For instructions on generating product hypotheses
+
+5. **Common Structural Tags**:
+   - `<task>` - For describing the overall task
+   - `<context>` - For providing context information
+   - `<input_data>` - For referencing input data
+   - `<output_format>` - For specifying output format requirements
+   - `<rules>` - For listing rules to follow
+   - `<examples>` - For providing examples
+
+## Examples
+
+<example>
+Good System Prompt with Proper Tagging:
+```
+<task>
+  Analyze customer communication transcripts to identify customer needs and problems.
+</task>
+
+<analysis_framework>
+  Use the Job Story format to structure identified needs:
+  - When [situation]
+  - I want to [motivation]
+  - So I can [expected outcome]
+</analysis_framework>
+
+<extraction_criteria>
+  Look for statements where customers express:
+  - Pain points or frustrations
+  - Goals they want to achieve
+  - Constraints or limitations they face
+</extraction_criteria>
+
+<output_format>
+  Return results in JSON format according to the structure defined in `05_jtbd_framework_rule.mdc`.
+  This ensures consistency with the JTBD framework and proper formatting of all required fields.
+</output_format>
+```
+</example>
+
+<example type="invalid">
+Poor Prompt Tagging:
+```
+Analyze the customer transcripts and find their needs.
+
+<format>
+JSON with needs and quotes
+</format>
+
+Look for pain points.
+
+<output>
+Make it look nice
+</output>
+```
+
+Issues:
+- Inconsistent and incomplete tagging
+- Missing critical tags for framework and criteria
+- Vague tag names that don't reflect content purpose
+- No clear structure between system knowledge and task instructions
+</example>
+
+## Tag Consistency Across Workflow Example
+
+<example>
+First Prompt (Data Cleaning):
+```
+<task>
+  Clean customer communication data by removing irrelevant content.
+</task>
+
+<research_boundaries>
+  Include: Product feedback, feature requests, pain points
+  Exclude: Small talk, technical issues unrelated to product
+</research_boundaries>
+
+<cleaning_instructions>
+  1. Remove greetings and closings
+  2. Remove off-topic conversations
+  3. Preserve context around relevant statements
+</cleaning_instructions>
+```
+
+Subsequent Prompt (Knowledge Extraction) with Consistent Tags:
+```
+<task>
+  Extract knowledge about customer needs from cleaned communication data.
+</task>
+
+<research_boundaries>
+  Include: Product feedback, feature requests, pain points
+  Exclude: Small talk, technical issues unrelated to product
+</research_boundaries>
+
+<extraction_criteria>
+  1. Identify explicit statements of needs
+  2. Identify implicit needs from described problems
+  3. Connect related needs across different communications
+</extraction_criteria>
+```
+</example>
+
+## Workflow Structure
+
+```mermaid
+---
+title: AI Agent Prompt Tagging Workflow
+---
+graph TD
+    A[First Prompt: Data Cleaning] -->|Establishes Tags| B[Second Prompt: Knowledge Extraction]
+    B -->|Maintains Tag Consistency| C[Third Prompt: Knowledge Validation]
+    C -->|Maintains Tag Consistency| D[Fourth Prompt: Knowledge Synthesis]
+    D -->|Maintains Tag Consistency| E[Fifth Prompt: Hypothesis Generation]
+```
+
+## Финальная проверка промптов
+
+При реструктуризации или создании промптов необходимо проверить наличие следующих критических элементов:
+
+### Критические элементы, которые нельзя упускать
+1. **Структурные элементы данных**:
+   - Нумерация чанков в формате X.Y
+   - Таймстемпы и индикаторы говорящих
+   - Ссылки на источники данных
+
+2. **Элементы формата вывода**:
+   - Точная спецификация JSON-структуры
+   - Обязательные поля в JSON
+   - Правила форматирования данных
+
+3. **Правила обработки данных**:
+   - Критерии для определения семантической значимости
+   - Правила сохранения элементов
+   - Правила удаления элементов без смысловой нагрузки
+
+4. **Проверки и валидации**:
+   - Проверка входных данных
+   - Проверка отсутствия додумывания
+   - Проверка сохранения семантического содержания
+   - Валидация формата JSON
+
+### Чек-лист для проверки промптов
+- [ ] Все критические теги из исходного промпта сохранены
+- [ ] Все правила обработки данных перенесены без изменений
+- [ ] Все требования к формату вывода сохранены
+- [ ] Все примеры и иллюстрации включены
+- [ ] Добавлены теги для проверки входных данных
+- [ ] Добавлены теги для проверки выходных данных
+- [ ] Добавлены теги для финальной валидации результатов
+- [ ] Проверено отсутствие противоречий между тегами
+
+### Дополнительные теги для очистки текста
+В соответствии с правилом `04_text_cleaning_rule.mdc`, при работе с промптами очистки текста необходимо использовать следующие специфические теги:
+
+- `<CleaningCriteria>` - критерии для определения элементов без семантической нагрузки
+- `<PreservationRequirements>` - требования к сохранению элементов
+- `<ResearchContext>` - контекст исследования для определения семантической значимости
+- `<FinalValidation>` - проверка отсутствия додумывания и сохранения всех критических элементов

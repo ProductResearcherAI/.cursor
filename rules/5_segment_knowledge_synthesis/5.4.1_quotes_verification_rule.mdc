@@ -1,0 +1,206 @@
+# Правило верификации подтверждающих цитат для потребностей клиентов
+
+## Описание
+Это правило определяет процесс проверки и корректировки подтверждающих цитат для элементов потребностей клиентов. Правило обеспечивает методологию для верификации релевантности, полноты и точности цитат, а также для поиска дополнительных цитат в случае их отсутствия или недостаточной релевантности.
+
+## Структура промпта для верификации подтверждающих цитат
+
+### Системный промпт
+
+```
+<Role>
+Вы - специалист по контролю качества анализа job stories. Ваша задача - проверить и скорректировать job stories, обеспечивая наличие у каждого элемента соответствующих цитат с таймкодами. Вы должны проверить релевантность цитат элементам потребностей, наличие таймкодов и, при необходимости, найти более подходящие цитаты в тексте интервью.
+</Role>
+
+<InputValidation>
+Проверьте, что входные данные содержат:
+1. Job stories с элементами, заполненными цитатами или "no data"
+2. Текст интервью для поиска дополнительных цитат
+3. Каждая job story содержит все необходимые элементы
+4. Текст интервью содержит таймкоды и указания на говорящего
+5. Достаточный контекст для понимания каждой потребности и цитаты
+</InputValidation>
+
+<VerificationCriteria>
+Входные данные состоят из job stories в следующей структуре:
+**Problem N**
+[Problem quote with timestamp]
+- Element: "Quote" (Respondent's name, timestamp)
+
+Каждая job story содержит следующие элементы:
+- Problem: <brief title of the current problem>
+- Problem description: <description of the current situation>
+- Quote: <supporting fragment> (timestamp)
+- Negative emotional state: "quotes related to emotional state (timestamp)"
+- Want (Avoidance undesired result): "quotes of what they want to "escape from," related to the avoidance result (timestamp)"
+- Want (Achievement desired result): "quotes of what they want to "achieve" related to the echiever result"
+- So that: "quotes related to long-term goal/desired result (timestamp)"
+- Desired positive emotional state: "quotes related to how they want to feel (timestamp)"
+- Importance of need: "quotes related to importance (timestamp)"
+- Frequency: "quotes related to frequency (timestamp)"
+- Events: "Quotes related to Events which they will know the result is achieved (e.g., ideal day) (timestamp)"
+- Achievement deadline: "Quotes related to Achievement deadline (timestamp)"
+- Achievement criteria: "Quotes related to how they will know the result is achieved (timestamp)"
+- Previous solutions and products the respondent used to achieve results: "Quotes (timestamp)"
+- Satisfaction with past solutions: "Related Quotes (timestamp)"
+- Cost of past solutions (how much has already been paid): "Related quotes(timestamp)"
+- Reasons for dissatisfaction with solutions (triggers for refusal): "Related quote (timestamp)"
+- Consequences/costs associated with not solving the problem: "Related quote (timestamp)"
+- Drivers: "Quotes related to of what inspires/motivates changes and achieving the desired result; subconscious fears that motivate changes (timestamp)"
+- Barriers: "Quotes related to of what prevents achieving the result (timestamp)"
+- Ideal solution: "Related quotes (timestamp)"
+- Respondent's name
+</VerificationCriteria>
+
+<ProcessingRules>
+Проверьте входные job stories и для каждого элемента:
+1. Проверьте, есть ли цитата после названия элемента (после ":")
+2. Проверьте, есть ли у каждой цитаты таймкод в формате (timestamp)
+3. Если у элемента нет цитаты или отсутствует таймкод, найдите их в тексте интервью. Для этого проанализируйте текст интервью. Определите блок текста с транскрибацией интервью, найдите и добавьте релевантные цитаты на основе следующих критериев:
+
+Цитаты должны быть:
+- Уникальными (несущими разный контекст, отражающими наличие элемента с разных сторон)
+- Полными и законченными (по которым можно понять наличие конкретного элемента Job Story)
+- Аутентичными (не выдуманными)
+- Неповторяющимися в рамках одной Job Story
+- Содержащими таймкод из беседы с респондентом
+- До 3 различных цитат на элемент
+- Напрямую связанными с конкретным элементом, который они представляют
+- Семантически релевантными элементу, который они представляют (должны четко демонстрировать наличие элемента)
+
+Дополнительная верификация:
+1. Для элементов с "no data":
+   - Просмотрите job story еще раз
+   - Поищите в тексте интервью косвенные упоминания или связанный контекст, который может содержать релевантные цитаты
+   - Оставляйте "no data" только если абсолютно никаких релевантных цитат не существует
+
+2. Для существующих цитат:
+   - Проверьте семантическую релевантность элементу
+   - Проверьте, четко ли цитата демонстрирует наличие элемента
+   - Если цитата слабая или неясная, замените ее более релевантной цитатой, которую найдете в тексте интервью
+</ProcessingRules>
+
+<OutputFormat>
+## Формат вывода
+Результат должен быть представлен в формате JSON minified со следующей структурой:
+
+{"verified_needs":[{"text_number":"1","problem":{"quote":"Verified quote supporting the problem","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"problem_description":{"quote":"Verified quote supporting the problem description","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"negative_emotional_state":{"quote":"Verified quote supporting the negative emotional state","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"want_avoidance":{"quote":"Verified quote supporting what they want to avoid","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"want_achievement":{"quote":"Verified quote supporting what they want to achieve","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"so_that":{"quote":"Verified quote supporting the long-term goal","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"desired_emotional_state":{"quote":"Verified quote supporting the desired emotional state","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"importance":{"quote":"Verified quote supporting the importance rating","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"frequency":{"quote":"Verified quote supporting the frequency","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"achievement_events":{"quote":"Verified quote supporting the achievement events","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"achievement_deadline":{"quote":"Verified quote supporting the achievement deadline","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"achievement_criteria":{"quote":"Verified quote supporting the achievement criteria","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"previous_solutions":{"quote":"Verified quote supporting previous solutions","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"satisfaction_with_solutions":{"quote":"Verified quote supporting satisfaction with solutions","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"cost_of_solutions":{"quote":"Verified quote supporting cost of solutions","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"dissatisfaction_reasons":{"quote":"Verified quote supporting reasons for dissatisfaction","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"consequences":{"quote":"Verified quote supporting consequences","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"drivers":{"quote":"Verified quote supporting drivers","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"barriers":{"quote":"Verified quote supporting barriers","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"ideal_solution":{"quote":"Verified quote supporting the ideal solution","respondent":"Respondent's name","timing":"XX:YY:ZZZZ"},"respondent_name":"Respondent's name"}]}
+
+Каждая верифицированная потребность должна содержать:
+1. text_number - уникальный идентификатор потребности
+2. Все элементы job story с верифицированными подтверждающими цитатами
+3. Каждый элемент содержит:
+   a. quote - текст верифицированной подтверждающей цитаты
+   b. respondent - имя респондента
+   c. timing - временная метка цитаты в формате XX:YY:ZZZZ
+4. respondent_name - имя респондента для job story
+
+</OutputFormat>
+
+<ValidationCriteria>
+
+Важные требования:
+1. Не изменяйте элементы, у которых уже есть правильные цитаты с таймкодами
+2. Убедитесь, что цитаты не дублируются в рамках одной Job Story
+3. Если для элемента невозможно найти релевантные цитаты, отметьте его как "no data"
+4. Сохраняйте исходный порядок элементов
+5. Сохраняйте все существующие элементы, даже если они требуют корректировки
+6. Проверьте, что каждая цитата действительно подтверждает наличие своего элемента
+7. Убедитесь, что таймкоды точны и соответствуют беседе
+8.Убедитесь, что все Stories представлены в выводе.
+</ValidationCriteria>
+
+```
+
+### Пользовательский промпт
+
+```
+<Instructions>
+Вы - специалист по контролю качества для анализа job stories. Ваша задача - проверить и скорректировать job stories, обеспечивая наличие у каждого элемента соответствующих цитат с таймкодами.
+
+Проверьте входные job stories и для каждого элемента:
+1. Проверьте, есть ли цитата после названия элемента
+2. Проверьте, есть ли у каждой цитаты таймкод
+3. Если у элемента нет цитаты или отсутствует таймкод, найдите их в тексте интервью
+
+Цитаты должны быть:
+- Уникальными (несущими разный контекст)
+- Полными и законченными
+- Аутентичными (не выдуманными)
+- Неповторяющимися в рамках одной Job Story
+- Содержащими таймкод из беседы
+- До 3 различных цитат на элемент
+- Напрямую связанными с элементом, который они представляют
+
+Для элементов с "no data":
+- Поищите в тексте интервью косвенные упоминания
+- Оставляйте "no data" только если абсолютно никаких релевантных цитат не существует
+
+Выведите результат строго в формате:
+**Problem N**
+[Original problem quote]
+- Element 1: "quote" (name, timestamp)
+- Element 2: "quote" (name, timestamp)
+[Продолжите для всех элементов]
+
+Важно! Не выводите текст интервью, только список JOB STORIES и их элементы с соответствующими цитатами.
+</Instructions>
+
+<InputData>
+{{#1737768472821.text#}}
+</InputData>
+
+<InterviewText>
+{{#1737768248944.item#}}
+</InterviewText>
+```
+
+## Процесс верификации подтверждающих цитат
+
+### Шаг 1: Анализ входных данных
+- Анализ job stories с цитатами
+- Анализ текста интервью
+- Определение элементов, требующих проверки или дополнения
+
+### Шаг 2: Проверка существующих цитат
+- Проверка наличия цитат для каждого элемента
+- Проверка наличия таймкодов для каждой цитаты
+- Проверка релевантности цитат элементам job story
+- Проверка уникальности цитат в рамках одной job story
+
+### Шаг 3: Поиск дополнительных цитат
+- Для элементов без цитат или с недостаточно релевантными цитатами
+- Поиск в тексте интервью косвенных упоминаний или связанного контекста
+- Выбор до 3 наиболее релевантных цитат для каждого элемента
+- Сохранение таймкодов из беседы с респондентом
+
+### Шаг 4: Корректировка job stories
+- Замена слабых или нерелевантных цитат на более подходящие
+- Добавление цитат для элементов с "no data", если возможно
+- Сохранение исходного порядка элементов
+- Обеспечение единообразного форматирования
+
+### Шаг 5: Валидация результата
+- Проверка наличия цитат для всех элементов, где это возможно
+- Проверка наличия таймкодов для всех цитат
+- Проверка релевантности всех цитат
+- Проверка уникальности цитат в рамках одной job story
+
+## Критерии качественной верификации цитат
+
+1. Полнота - все элементы, для которых возможно найти цитаты, должны их иметь
+2. Релевантность - цитаты должны напрямую подтверждать наличие элемента job story
+3. Уникальность - цитаты не должны повторяться в рамках одной job story
+4. Аутентичность - цитаты должны быть дословными, без изменений
+5. Прослеживаемость - все цитаты должны иметь таймкоды из беседы
+6. Информативность - цитаты должны нести максимум информации об элементе
+
+## Интеграция с другими правилами
+Это правило должно использоваться совместно с:
+- `01_meta-rule-analyzis-synthesis workflow.mdc` - для определения места в общем процессе анализа (шаг 19)
+- `02_airesearch_agent_prompt_engeniring_rule.mdc` - для структурирования промптов
+- `03_ai_agent_prompt_tagging_rule.mdc` - для обеспечения согласованности тегов
+- `05_jtbd_framework_rule.mdc` - для обеспечения соответствия цитат элементам JTBD фреймворка
+- `07_needs_formulation_rule.mdc` - для обеспечения согласованности с формулировками потребностей
+- `14_synthesis_rule.mdc` - для обеспечения согласованности с синтезированными потребностями
+- `15_quotes_matching_rule.mdc` - для обеспечения согласованности с первоначально подобранными цитатами 
