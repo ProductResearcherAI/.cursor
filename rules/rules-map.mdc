@@ -5,140 +5,74 @@ alwaysApply: false
 ---
 # Project Rules Map
 
-## Core Rules
-- `000-cursor-rules.mdc`: Core rules for managing workflow analysis and synthesis, including operation modes and access levels
-- `001-project-architecture.mdc`: Архитектура проекта и принципы взаимодействия с ней
-- `002-ai-agent-workflow-instructions.mdc`: Инструкции для AI-агента о последовательности действий при работе с проектом
-- `01_meta-rule-analyzis-synthesis workflow.mdc`: Meta-rule for client communication analysis workflow, including data cleaning, knowledge extraction, verification, and synthesis
-- `0.7_product_segmentation_sales_implementation_rule.mdc`: Документация по сегментам, методам продаж и процессам имплементации продукта для разных режимов работы
+Данная карта правил предоставляет централизованный реестр всех правил проекта, организованных по этапам рабочего процесса анализа и синтеза.
 
-## Business Task Rules
-- `0.1_business_task_types_rule.mdc`: Правило типов бизнес-задач и их характеристик
-- `0.2_business_task_formulation_rule.mdc`: Правила формулирования и декомпозиции бизнес-задач
-- `19_business_task_formulation_rule.mdc`: Правило формулирования бизнес-задачи и ее декомпозиции
+## Этапы и соответствующие правила
 
-## Research and Interview Rules
-- `0.3_research_questions_definition_rule.mdc`: Правила определения исследовательских вопросов
-- `0.4_default_research_questions_library.mdc`: Библиотека стандартных исследовательских вопросов
-- `0.5_interview_questions_definition_rule.mdc`: Правила формулирования вопросов интервью на основе исследовательских вопросов
-- `0.6_interview_guide_creation_rule.mdc`: Правила создания гайда интервью
-- `1.5_research_questions_extraction_rule.mdc`: Правила извлечения ответов на исследовательские вопросы
-- `1.6_synthetic_respondent_interview_rule.mdc`: Правило для проведения тестовых интервью с синтетическими респондентами перед реальными интервью
-- `1.7_interview_invitation_messages_rule.mdc`: Правило для создания вовлекающих интро и фоллоу-ап сообщений для приглашения респондентов на интервью
-- `1.8_interview_personalized_messages_rule.mdc`: Правило создания персонализированных сообщений для приглашения на интервью с учетом временных зон и индивидуального опыта респондентов
+| Этап | Правило | Описание | Применимость |
+|------|---------|----------|-------------|
+| **1. Постановка целей** | | | |
+| 1.1 Определение бизнес-задач | `1.1.1_business_task_types_rule.mdc` | Правило типов бизнес-задач и их характеристик | Все проекты |
+| 1.1 Формулирование задач | `1.1.2_business_task_formulation_rule.mdc` | Правила формулирования и декомпозиции бизнес-задач | Все проекты |
+| 1.2 Исследовательские вопросы | `1.2.1_research_questions_definition_rule.mdc` | Правила определения исследовательских вопросов | Все проекты |
+| 1.2 Библиотека вопросов | `1.2.2_default_research_questions_library.mdc` | Библиотека стандартных исследовательских вопросов | Все проекты |
+| 1.3 Емкость рынка | `1.3.1_market_capacity_research_rule.mdc` | Правило деск-исследования и расчета емкости рынка TAM/SAM/SOM | B2C/B2B проекты |
+| **2. Подготовка к интервью** | | | |
+| 2.1 JTBD Фреймворк | `2.1.0_interview_analysis_rule.mdc` | Базовое правило анализа интервью и формулирования потребностей | JTBD проекты |
+| 2.1 Структура фреймворка | `2.1.1_jtbd_framework_rule.mdc` | Структура и правила фреймворка JTBD с принципами недопущения общих фраз | JTBD проекты |
+| 2.1 Верификация потребностей | `2.1.2_needs_verification_rule.mdc` | Правила верификации корректности формулировок потребностей | JTBD проекты |
+| 2.1 Проверка достоверности | `2.1.3_needs_formulation_verification_rule.mdc` | Правила проверки достоверности формулировок потребностей | Критически важные проекты |
+| 2.2 Вопросы интервью | `2.2.1_interview_questions_definition_rule.mdc` | Правила формулирования вопросов интервью на основе исследовательских вопросов | Все проекты |
+| 2.3 Гайд интервью | `2.3.1_interview_guide_creation_rule.mdc` | Правила создания гайда интервью | Все проекты |
+| **3. Организация интервью** | | | |
+| 3.1 Тестовое интервью | `3.1.1_synthetic_respondent_interview_rule.mdc` | Правило для проведения тестовых интервью с синтетическими респондентами | Все проекты |
+| 3.1 Извлечение вопросов | `3.1.2_interview_questions_extraction_rule.mdc` | Правило извлечения и структурирования вопросов интервью из транскрибаций | Все проекты |
+| 3.2 Приглашения респондентов | `3.2.1_interview_invitation_messages_rule.mdc` | Правило для создания вовлекающих интро и фоллоу-ап сообщений | Все проекты |
+| 3.3 Персонализация | `3.3.1_interview_personalized_messages_rule.mdc` | Правило создания персонализированных сообщений для приглашения | Все проекты |
+| **4. Обработка данных** | | | |
+| 4.1 Очистка текста | `4.1.1_text_cleaning_rule.mdc` | Правила очистки текста интервью с сохранением семантической целостности | Все проекты |
+| 4.1 Обработка реплик интервьюера | `4.1.2.1_interviewer_remarks_removal_rule.mdc` / `4.1.2.2_interviewer_remarks_preservation_rule.mdc` | Правила удаления или сохранения реплик интервьюера | Все проекты |
+| 4.3 Распределение цитат | `4.3.1_quotes_distribution_rule.mdc` | Правила распределения цитат по исследовательским вопросам | Все проекты |
+| 4.3 Верификация цитат | `4.3.2_quotes_distribution_verification_rule.mdc` | Правила верификации распределения цитат | Все проекты |
+| 4.3 RAG структурирование | `4.3.3_quotes_rag_structuring_rule.mdc` | Правила структурирования цитат для RAG-системы | Все проекты |
+| 4.4 Идентификация цитат | `4.4.1_quotes_identification_rule.mdc` | Правила идентификации значимых цитат из интервью | Все проекты |
+| 4.4 Обогащение цитат | `4.4.2_quotes_enrichment_rule.mdc` | Правила обогащения цитат контекстом и метаданными | Все проекты |
+| **5. Консолидация знаний** | | | |
+| 5.1 Фреймворки консолидации | `5.1.1_consolidation_framework_segment_A.mdc` | Фреймворк консолидации для лояльных клиентов (сегмент A) | B2C проекты |
+| 5.1 Фреймворки консолидации | `5.1.2_consolidation_framework_segment_B.mdc` | Фреймворк консолидации для ушедших клиентов (сегмент B) | B2C проекты |
+| 5.1 Фреймворки консолидации | `5.1.3_consolidation_framework_segment_C.mdc` | Фреймворк консолидации для потенциальных клиентов (сегмент C) | B2C проекты |
+| **6. Синтез и анализ** | | | |
+| 6.1 Синтез по умолчанию | `6.1.1_default_synthesis_rule.mdc` | Дефолтные правила синтеза потребностей клиентов и формирования паттернов | Все проекты |
+| 6.3 Подбор цитат | `5.3.1_quotes_matching_rule.mdc` | Правила подбора подтверждающих цитат для синтезированных потребностей | Все проекты |
+| 6.4 Верификация цитат | `5.4.1_quotes_verification_rule.mdc` | Правила верификации подтверждающих цитат | Все проекты |
+| **7. Специальные правила** | | | |
+| Граф задач в реальном времени | `3.1.1_realtime_customer_jobs_graph_rule.mdc` | Правило ведения графа задач клиентов в реальном времени | B2C/B2B проекты |
+| Трекер интервью | `3.1.1_synthetic_respondent_interview_rule.mdc` | Правило для проведения тестовых интервью с синтетическими респондентами | Все проекты |
+| Приглашения интервью | `3.2.1_interview_invitation_messages_rule.mdc` | Правило для создания вовлекающих интро и фоллоу-ап сообщений | Все проекты |
+| **Технические правила** | | | |
+| Обработка таймаутов | `0.5_technical_timeout_handling_rule.mdc` | Технические правила для обработки таймаутов и работы с длинными файлами | Все правила |
+| Markdown документация | `400-md-docs.mdc` | Стандарты форматирования Markdown-документации | Документация |
+| История промптов | `402-prompts-history-format.mdc` | Правило форматирования и ведения истории промптов | Все проекты |
+| CSV консолидация | `csv_consolidation_rule.mdc` | Правило консолидации данных в CSV с обработкой кавычек и итерационной проверкой | Табличные данные |
+| **Системные правила** | | | |
+| Основные правила | `000-cursor-rules.mdc` | Основные правила управления рабочим процессом анализа и синтеза | Всегда применяется |
+| Архитектура проекта | `001-project-architecture.mdc` | Архитектура проекта и принципы взаимодействия | Инициализация проекта |
+| Мета-правило | `01_meta-rule-analyzis-synthesis workflow.mdc` | Мета-правило рабочего процесса анализа и синтеза клиентских коммуникаций | Управление процессом |
 
-## AI-Agent Rules
-- `0.8_ai_agent_prompt_tagging_rule.mdc`: Правила тегирования промптов AI-агента для эффективной работы
-- `0.9_airesearch_agent_prompt_engeniring_rule.mdc`: Правила инженерного дизайна промптов для AI-агента
+## Библиотеки примеров и справочные материалы
 
-## Text Cleaning Rules
-- `1.3_text_cleaning_rule.mdc`: Правила очистки текста интервью
-- `1.4_interviewer_remarks_removal_rule.mdc`: Правила удаления замечаний интервьюера
+| Тип | Файл | Описание |
+|-----|------|----------|
+| Верифицированные формулировки | `.cursor/libraries/b2c/verified_formulations_library.mdc` | Дефолтная библиотека верифицированных формулировок для B2C проектов |
+| Примеры консолидации | `.cursor/libraries/consolidation_examples_loyal_customers.mdc` | Анонимизированные примеры консолидации лояльных клиентов |
+| Примеры консолидации | `.cursor/libraries/consolidation_examples_churned_customers.mdc` | Анонимизированные примеры консолидации ушедших клиентов |
+| Расчет емкости рынка | `.cursor/libraries/market_capacity_calculation_example.mdc` | Пример расчета емкости рынка TAM/SAM/SOM |
 
-## Quotes Rules
-- `2.1_quotes_identification_rule.mdc`: Правила идентификации значимых цитат
-- `2.2_quotes_enrichment_rule.mdc`: Правила обогащения цитат контекстом
-- `2.3_quotes_distribution_rule.mdc`: Правила распределения цитат по исследовательским вопросам
-- `2.4_quotes_distribution_verification_rule.mdc`: Правила верификации распределения цитат
-- `2.5_quotes_rag_structuring_rule.mdc`: Правила структурирования цитат для RAG-системы
+## Использование карты правил
 
-## Framework and Needs Formulation Rules
-- `3.1_jtbd_framework_rule.mdc`: Структура и правила фреймворка JTBD
-- `3.2_needs_formulation_rule.mdc`: Правила формулирования потребностей клиентов
-- `3.3_needs_formulation_verification_rule.mdc`: Правила верификации формулировок потребностей
-- `3.4_needs_formulation_final_verification_rule.mdc`: Правила финальной верификации формулировок потребностей
+1. **Выбор правил по этапу**: Используйте таблицу для определения необходимых правил на каждом этапе проекта
+2. **Проверка применимости**: Убедитесь, что выбранные правила подходят для типа вашего проекта (B2C/B2B/JTBD)
+3. **Интеграция правил**: Обратите внимание на взаимосвязи между правилами при их совместном использовании
+4. **Адаптация**: При необходимости адаптируйте правила под специфику конкретного проекта
 
-## Synthesis Rules
-- `5.1_default_synthesis_rule.mdc`: Дефолтные правила синтеза потребностей клиентов и формирования паттернов
-- `5.2_synthesis_rule.mdc`: Скорректированные правила синтеза
-- `5.3_quotes_matching_rule.mdc`: Правила подбора подтверждающих цитат для синтезированных потребностей
-- `5.4_quotes_verification_rule.mdc`: Правила верификации подтверждающих цитат
-
-## Technical Rules
-- `0.5_technical_timeout_handling_rule.mdc`: Технические правила для обработки таймаутов и работы с длинными файлами
-- `400-md-docs.mdc`: Правила форматирования Markdown-документации
-- `402-prompts-history-format.mdc`: Правило форматирования и ведения истории использованных промптов в проекте
-
-This file serves as a central registry of all rules available in the project. It helps the AI assistant quickly locate and apply the appropriate rules based on the context.
-
-## Available Rules
-
-| Rule ID | Name | Description | Applies To |
-|---------|------|-------------|------------|
-| 000-cursor-rules | Cursor Rules Format | Core rules for managing workflow analysis and synthesis, including operation modes and access levels | `.cursor/rules/*.mdc` |
-| 001-project-architecture | Архитектура проекта | Архитектура проекта и принципы взаимодействия с ней | `**/*.{yml,yaml,json,md,txt}` |
-| 002-ai-agent-workflow-instructions | Инструкции для AI-агента | Инструкции для AI-агента о последовательности действий при работе с проектом | `**/*.{yml,yaml,json,md,txt}` |
-| 01_meta-rule-analyzis-synthesis workflow | Analysis-Synthesis Workflow | Meta-rule for client communication analysis workflow, including data cleaning, knowledge extraction, verification, and synthesis | `**/*.{yml,yaml,json,md,txt}` |
-| 0.1_business_task_types_rule | Business Task Types | Правило типов бизнес-задач и их характеристик | `**/*.{yml,yaml,json,md,txt}` |
-| 0.2_business_task_formulation_rule | Business Task Formulation | Правила формулирования и декомпозиции бизнес-задач | `**/*.{yml,yaml,json,md,txt}` |
-| 0.3_research_questions_definition_rule | Research Questions Definition | Правила определения исследовательских вопросов | `**/*.{yml,yaml,json,md,txt}` |
-| 0.4_default_research_questions_library | Default Research Questions | Библиотека стандартных исследовательских вопросов | `**/*.{yml,yaml,json,md,txt}` |
-| 0.5_interview_questions_definition_rule | Interview Questions Definition | Правила формулирования вопросов интервью на основе исследовательских вопросов | `**/*.{yml,yaml,json,md,txt}` |
-| 0.6_interview_guide_creation_rule | Interview Guide Creation | Правила создания гайда интервью | `**/*.{yml,yaml,json,md,txt}` |
-| 0.7_product_segmentation_sales_implementation_rule | Product Segmentation & Sales | Документация по сегментам, методам продаж и процессам имплементации продукта | `**/*.{yml,yaml,json,md,txt}` |
-| 0.8_ai_agent_prompt_tagging_rule | AI Agent Prompt Tagging | Правила тегирования промптов AI-агента для эффективной работы | `**/*.{py,yml,yaml,json}` |
-| 0.9_airesearch_agent_prompt_engeniring_rule | AI Agent Prompt Engineering | Правила инженерного дизайна промптов для AI-агента | `**/*.{py,yml,yaml,json}` |
-| 1.3_text_cleaning_rule | Text Cleaning Standards | Rules for cleaning interview transcripts while preserving semantic integrity | `**/*.{py,yml,yaml,json}` |
-| 1.4_interviewer_remarks_removal_rule | Interviewer Remarks Removal | Rules for filtering out interviewer questions and remarks | `**/*.{py,yml,yaml,json}` |
-| 1.5_research_questions_extraction_rule | Research Questions Extraction | Rules for extracting research questions from interview transcriptions | `**/*.{py,yml,yaml,json}` |
-| 1.6_synthetic_respondent_interview_rule | Synthetic Respondent Interview | Rules for conducting test interviews with synthetic respondents before real interviews | `**/*.{py,yml,yaml,json}` |
-| 1.7_interview_invitation_messages_rule | Interview Invitation Messages | Rules for creating engaging intros and follow-up messages for inviting respondents to interviews | `**/*.{py,yml,yaml,json}` |
-| 1.8_interview_personalized_messages_rule | Interview Personalized Messages | Rules for creating personalized messages for inviting respondents to interviews | `**/*.{py,yml,yaml,json}` |
-| 2.1_quotes_identification_rule | Quotes Identification | Rules for identifying significant quotes from customer interviews | `**/*.{py,yml,yaml,json}` |
-| 2.2_quotes_enrichment_rule | Quotes Enrichment | Rules for enriching identified quotes with context and metadata | `**/*.{py,yml,yaml,json}` |
-| 2.3_quotes_distribution_rule | Quotes Distribution | Rules for distributing quotes across research questions | `**/*.{py,yml,yaml,json}` |
-| 2.4_quotes_distribution_verification_rule | Quotes Distribution Verification | Rules for verifying the distribution of quotes across research questions | `**/*.{py,yml,yaml,json}` |
-| 2.5_quotes_rag_structuring_rule | RAG Structuring | Rules for structuring distributed quotes in RAG format | `**/*.{py,yml,yaml,json}` |
-| 3.1_jtbd_framework_rule | JTBD Framework Standards | Rules for structuring Job Stories in the Jobs-to-be-Done framework | `**/*.{py,yml,yaml,json}` |
-| 3.2_needs_formulation_rule | Needs Formulation Standards | Rules for formulating customer needs in the JTBD framework | `**/*.{py,yml,yaml,json}` |
-| 3.3_needs_formulation_verification_rule | Needs Verification Standards | Rules for verifying the accuracy of customer needs formulations | `**/*.{py,yml,yaml,json}` |
-| 3.4_needs_formulation_final_verification_rule | Final Needs Verification | Rules for final verification of customer needs formulations | `**/*.{py,yml,yaml,json}` |
-| 5.1_default_synthesis_rule | Default Synthesis | Default rules for synthesizing customer needs into patterns with frequency and coverage metrics | `**/*.{py,yml,yaml,json}` |
-| 5.2_synthesis_rule | Synthesis | Rules for analyzing and consolidating customer needs (job stories) into meaningful patterns | `**/*.{py,yml,yaml,json}` |
-| 5.3_quotes_matching_rule | Quotes Matching | Rules for matching supporting quotes to identified needs | `**/*.{py,yml,yaml,json}` |
-| 5.4_quotes_verification_rule | Quotes Verification | Rules for verifying the relevance of supporting quotes | `**/*.{py,yml,yaml,json}` |
-| 0.5_technical_timeout_handling_rule | Technical Timeout Handling | Rules for handling timeouts and working with large files, including incremental reading and editing strategies | `**/*.{py,yml,yaml,json,mdc}` |
-| 400-md-docs | Markdown Documentation Standards | Standards for consistent formatting and readability in Markdown files | `**/*.{md,mdx}` |
-| 402-prompts-history-format | История промптов | Правило форматирования и ведения истории использованных промптов и их результатов | `prompts_log/prompts_history.md` |
-
-# Rules Renaming Map
-
-| Old Rule Name | New Rule Name |
-|--------------|---------------|
-| 0.1_business_task_types_rule | 1.1.1_business_task_types_rule |
-| 0.2_business_task_formulation_rule | 1.1.2_business_task_formulation_rule |
-| 0.3_research_questions_definition_rule | 1.2.1_research_questions_definition_rule |
-| 0.4_default_research_questions_library | 1.2.2_default_research_questions_library |
-| 3.1_jtbd_framework_rule | 2.1.1_jtbd_framework_rule |
-| 3.2_needs_formulation_rule | 2.1.2_needs_formulation_rule |
-| 3.3_needs_formulation_verification_rule | 2.1.3_needs_formulation_verification_rule |
-| 1.1_interview_questions_definition_rule | 2.2.1_interview_questions_definition_rule |
-| 0.6_interview_guide_creation_rule | 2.3.1_interview_guide_creation_rule |
-| 1.6_synthetic_respondent_interview_rule | 3.1.1_synthetic_respondent_interview_rule |
-| 1.5_interview_questions_extraction_rule | 3.1.2_interview_questions_extraction_rule |
-| 1.7_interview_invitation_messages_rule | 3.2.1_interview_invitation_messages_rule |
-| 1.8_interview_personalized_messages_rule | 3.3.1_interview_personalized_messages_rule |
-| 1.3_text_cleaning_rule | 4.1.1_text_cleaning_rule |
-| 1.4_interviewer_remarks_removal_rule | 4.1.2_interviewer_remarks_removal_rule |
-| 2.3_quotes_distribution_rule | 4.3.1_quotes_distribution_rule |
-| 2.4_quotes_distribution_verification_rule | 4.3.2_quotes_distribution_verification_rule |
-| 2.5_quotes_rag_structuring_rule | 4.3.3_quotes_rag_structuring_rule |
-| 2.1_quotes_identification_rule | 4.4.1_quotes_identification_rule |
-| 2.2_quotes_enrichment_rule | 4.4.2_quotes_enrichment_rule |
-| 4.5.1_needs_formulation_rule | 4.5.1_needs_formulation_rule |
-| 4.6.1_needs_formulation_verification_rule | 4.6.1_needs_formulation_verification_rule |
-| 4.7.1_needs_formulation_final_verification_rule | 4.7.1_needs_formulation_final_verification_rule |
-| 4.9.1_default_synthesis_rule | 4.9.1_default_synthesis_rule |
-| 4.9.2_synthesis_rule | 4.9.2_synthesis_rule |
-| 5.3_quotes_matching_rule | 5.3.1_quotes_matching_rule |
-| 5.4_quotes_verification_rule | 5.4.1_quotes_verification_rule |
-
-# Технические правила (не меняются)
-| 0.5_technical_timeout_handling_rule | 0.5_technical_timeout_handling_rule |
-| 0.7_product_segmentation_sales_implementation_rule | 0.7_product_segmentation_sales_implementation_rule |
-| 0.8_ai_agent_prompt_tagging_rule | 0.8_ai_agent_prompt_tagging_rule |
-| 0.9_airesearch_agent_prompt_engeniring_rule | 0.9_airesearch_agent_prompt_engeniring_rule |
-| 400-md-docs | 400-md-docs |
-| 402-prompts-history-format | 402-prompts-history-format |
-
-<version>3.2.0</version> 
+<version>4.0.0</version> 
