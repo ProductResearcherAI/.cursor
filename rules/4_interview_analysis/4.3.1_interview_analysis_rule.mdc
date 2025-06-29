@@ -152,10 +152,9 @@ alwaysApply: false
 ## Интеграция с другими правилами
 
 Данное правило используется совместно с:
-- **2.1.1_jtbd_framework_rule.mdc и framework_sturcture.md (в папке проекта)** - для структуры фреймворка
-- **2.1.2_needs_verification_rule.mdc** - для последующей верификации
-- **2.1.3_needs_formulation_verification_rule.mdc** - для проверки достоверности
-- **01_meta-rule-analyzis-synthesis workflow.mdc** - для определения места в общем процессе
+- **`framework_structure.md` (в папке проекта)** - для структуры фреймворка
+- **`4.3.2_needs_formulation_verification_rule.mdc`** - для последующей верификации и проверки достоверности
+- **`01_meta-rule-analyzis-synthesis workflow.mdc`** - для определения места в общем процессе
 
 
 
