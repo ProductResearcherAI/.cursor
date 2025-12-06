@@ -120,7 +120,7 @@ AI-агент для масштабирования качественных и�
 - **Pro-версия**: https://udify.app/workflow/e3dYOWXH8DS3SRFv
 
 ### Контакт
-👉 [@kkoti](https://t.me/kkoti) (Telegram)
+👉 [@kkotilev](https://t.me/kkotilev) (Telegram)
 
 ---
 
